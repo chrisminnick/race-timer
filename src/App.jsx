@@ -1,4 +1,6 @@
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import Configuration from './components/Configuration';
 import Timer from './components/Timer';
 import Race from './components/Race';
 import { useState, useEffect } from 'react';
@@ -11,16 +13,28 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(currentTime - 1);
-    }, 1000);
+    }, 250);
     return () => clearInterval(interval);
   });
 
   return (
     <>
-      <Background>
-        <Timer currentTime={currentTime} />
-        <Race currentTime={currentTime} />
-      </Background>
+      <Router>
+        <Link to="/config">Config Screen</Link> |{' '}
+        <Link to="/game">Game Screen</Link>
+        <Routes>
+          <Route path="/config" element={<Configuration />} />
+          <Route
+            path="/game"
+            element={
+              <Background>
+                <Timer currentTime={currentTime} />
+                <Race currentTime={currentTime} />
+              </Background>
+            }
+          />
+        </Routes>
+      </Router>
     </>
   );
 }

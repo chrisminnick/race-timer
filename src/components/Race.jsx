@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
 import Contestant from './Contestant.jsx';
 import { contestantStyles } from '../styles';
-import { contestants } from '../assets/data';
+import { contestantData } from '../assets/data';
 
 function Race(props) {
-  const [everyContestant, setAllContestants] = useState(contestants)
+  const [contestants, setContestants] = useState(contestantData);
 
   useEffect(() => {
-    for(contestant in everyContestant) {
-      contestant.xpos += 50;
-    }
-  });
-
+    let newContestantPos = contestants.map((contestant) => {
+      return {
+        ...contestant,
+        xpos: contestant.xpos + Math.floor(Math.random() * 10),
+      };
+    });
+    setContestants(newContestantPos);
+  }, [props.currentTime]);
   return (
     <div style={contestantStyles.contestantList}>
       {props.currentTime}
@@ -25,5 +28,4 @@ function Race(props) {
     </div>
   );
 }
-
 export default Race;
