@@ -10,7 +10,7 @@ function Race(props) {
 
   const handleStop = () => {
     props.stopTimer();
-    navigateTo('/config');
+    //navigateTo('/config');
   };
 
   useEffect(() => {
@@ -20,6 +20,9 @@ function Race(props) {
         xpos: contestant.xpos + Math.floor(Math.random() * 10),
       };
     });
+    if (parseInt(props.currentTime) === 0) {
+      handleStop();
+    }
     setContestants(newContestantPos);
   }, [props.currentTime]);
 
