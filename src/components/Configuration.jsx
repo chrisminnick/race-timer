@@ -1,32 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 function Configuration(props) {
   let navigateTo = useNavigate();
-  const [newLength, setNewLength] = useState(60);
-
-  function handleChange(newTime) {
-    setNewLength(newTime);
-    props.setLength(newTime);
-  }
-
   const handleStart = () => {
     props.startTimer();
-    navigateTo('/timer');
+    navigateTo("/timer");
   };
   return (
     <div>
       <label>Length of Timer:</label>
       <input
         type="text"
-        value={newLength}
-        onChange={(e) => handleChange(e.target.value)}
+        value={props.length}
+        onChange={(e) => props.setLength(e.target.value)}
       />
       <br />
       <label>Number of Contestants:</label>
       <input
         type="number"
         value={props.numPlayers}
-        onChange={(e) => props.setNumContestants(e.target.value)}
+        onChange={(e) => props.setNumPlayers(e.target.value)}
       />
       <button onClick={handleStart}>Start the Timer!</button>
     </div>
