@@ -1,6 +1,7 @@
 function Background(props) {
   return (
     <div
+      data-testid="background"
       style={{
         backgroundColor: '#eaeaea',
         maxWidth: '1200px',

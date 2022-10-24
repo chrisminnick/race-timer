@@ -8,7 +8,7 @@ function Configuration(props) {
     navigateTo('/timer');
   };
   return (
-    <div>
+    <div data-testid="configuration">
       {/*Input area for setting timer */}
       <label>Length of Timer:</label>
       <input

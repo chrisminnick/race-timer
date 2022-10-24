@@ -13,9 +13,6 @@ function success(result) {
 function failure(err) {
   console.log('there was an error', err);
 }
-test('logs user in when they enter a good username and pass', () => {
-  return authenticate('joe', 'fvknsaddflkdfk22232').then(success, failure);
-});
 
 function sum(num1, num2) {
   if (typeof num1 != 'number' || typeof num2 != 'number') {
