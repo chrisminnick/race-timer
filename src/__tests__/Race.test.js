@@ -14,3 +14,17 @@ test('renders the race component', () => {
   const raceId = screen.getByTestId('race');
   expect(raceId).toBeInTheDocument();
 });
+
+test('renders the race component', () => {
+  const setContestants = jest.fn();
+  render(
+    <Router>
+      <Race
+        contestants={[{ id: '0', name: 'Ola', xpos: 500, ypos: 0 }]}
+        setContestants={setContestants}
+      />
+    </Router>
+  );
+
+  expect(setContestants).toHaveBeenCalled();
+});
