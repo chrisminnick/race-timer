@@ -1,6 +1,7 @@
 function Contestant(props) {
   return (
     <div
+      data-testid="contestant"
       style={{
         position: 'relative',
         left: props.xpos,

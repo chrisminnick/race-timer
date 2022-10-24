@@ -1,27 +1,24 @@
 import { useState, useEffect } from 'react';
 import Contestant from './Contestant.jsx';
 import { contestantStyles } from '../styles';
-import { contestantData } from '../assets/data';
 import { useNavigate } from 'react-router-dom';
 import '../styles/race.css';
 
 function Race(props) {
-  const [contestants, setContestants] = useState(contestantData);
   let navigateTo = useNavigate();
-
   const handleStop = () => {
     props.stopTimer();
     navigateTo('/config');
   };
 
   useEffect(() => {
-    let newContestantPos = contestants.map((contestant) => {
+    let newContestantPos = props.contestants.map((contestant) => {
       return {
         ...contestant,
         xpos: contestant.xpos + Math.floor(Math.random() * 80) - 40,
       };
     });
-    setContestants(newContestantPos);
+    props.setContestants(newContestantPos);
     if (props.currentTime === 0) {
       props.stopTimer();
       alert(winner().name + ' is the winner!');
@@ -29,16 +26,16 @@ function Race(props) {
   }, [props.currentTime]);
 
   function winner() {
-    let winner = contestants[0];
+    let winner = props.contestants[0];
     for (
       let i = 0;
       i <
-      contestants.filter((contestant, index) => index < props.numPlayers)
+      props.contestants.filter((contestant, index) => index < props.numPlayers)
         .length;
       i++
     ) {
-      if (contestants[i].xpos > winner.xpos) {
-        winner = contestants[i];
+      if (props.contestants[i].xpos > winner.xpos) {
+        winner = props.contestants[i];
       }
     }
     return winner;
@@ -46,7 +43,7 @@ function Race(props) {
 
   return (
     <div className="Finish-Line" style={contestantStyles.contestantList}>
-      {contestants
+      {props.contestants
         .filter((contestant, index) => index < props.numPlayers)
         .map((contestant) => (
           <Contestant
