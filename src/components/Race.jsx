@@ -42,7 +42,11 @@ function Race(props) {
   }
 
   return (
-    <div className="Finish-Line" style={contestantStyles.contestantList}>
+    <div
+      data-testid="race"
+      className="Finish-Line"
+      style={contestantStyles.contestantList}
+    >
       {props.contestants
         .filter((contestant, index) => index < props.numPlayers)
         .map((contestant) => (
